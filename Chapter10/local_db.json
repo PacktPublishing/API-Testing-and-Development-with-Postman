@@ -1,0 +1,33 @@
+{
+  "blogposts": [
+    {
+      "id": 1,
+      "title": "The FIRST blog post",
+      "body": "This is my first blog post",
+      "profileId": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "blogpostId": 1
+    }
+  ],
+  "profiles": [
+    {
+      "id": 1,
+      "name": "John Smith"
+    }
+  ],
+  "avatars": [
+    {
+      "id": 1,
+      "description": "A Public avatar?",
+      "url": "www.example.com/avatar.jpg",
+      "profileId": 1,
+      "commentId": 1,
+      "blogpostId": 1
+    }
+  ]
+}
