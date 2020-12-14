@@ -1,0 +1,11 @@
+{
+  "name": "newman-reporter-myreporter",
+  "version": "1.0.0",
+  "description": "example reporter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dave W",
+  "license": "ISC"
+}

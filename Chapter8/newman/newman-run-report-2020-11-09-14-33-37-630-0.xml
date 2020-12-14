@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Newman Test" tests="1" time="0.000">
+  <testsuite name="Test GET" id="5a099602-0bd5-4c94-b1c1-79ff168dbb7c" timestamp="2020-11-09T14:33:26.456Z" tests="0" failures="0" errors="1" time="0.000">
+    <system-err><![CDATA[Iteration: 0
+RequestError: Error: getaddrinfo ENOTFOUND postman-echo.com
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
+
+---
+]]></system-err>
+  </testsuite>
+</testsuites>

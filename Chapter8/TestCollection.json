@@ -11,19 +11,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://postman-echo.com/get?test=true",
-					"protocol": "https",
+					"raw": "{{baseUrl}}/get?{{queryParam}}={{queryParamVal}}",
 					"host": [
-						"postman-echo",
-						"com"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"get"
 					],
 					"query": [
 						{
-							"key": "test",
-							"value": "true"
+							"key": "{{queryParam}}",
+							"value": "{{queryParamVal}}"
 						}
 					]
 				}

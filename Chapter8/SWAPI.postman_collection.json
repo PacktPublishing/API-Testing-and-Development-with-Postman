@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "f22ae7ab-60f4-41b8-a0ea-d781b3ebc78c",
+		"name": "SWAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Luke",
+			"item": [
+				{
+					"name": "Get First Person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e34c10a-6d65-43f5-9d9b-ae511c54f94c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status('OK');\r",
+									"});\r",
+									"pm.test(\"Check that the response body contains Luke\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Luke\");\r",
+									"});\r",
+									"pm.test(\"Check that the height is 172\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.height).to.eql(\"172\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/people/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"people",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Luke's home world",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5e4bcf6a-9520-4821-b8ec-6340ca314005",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0225399-e4c2-4a86-a753-be8df21390aa",
+								"exec": [
+									"console.log('test')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/planets/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"planets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "016f10eb-2309-4855-ae05-9d0573211ee2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d9d45ea-f8ba-4709-9d61-73eaaf028e29",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Check that they are in film 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.films).to.contain(\"http://swapi.dev/api/films/1/\");",
+							"});",
+							"",
+							"console.log('folder')"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get Homeworld",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a763a0c5-6a7c-412d-a63b-f6396212e167",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var planetResidents = jsonData.residents;\r",
+							"pm.environment.set(\"residentList\", planetResidents);\r",
+							"pm.environment.set(\"counter\", 0);\r",
+							"console.log(planetResidents.length);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/planets/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"planets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Person",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5710dfb2-52b7-4ecc-8c97-882df93a641d",
+						"exec": [
+							"var residentList = pm.environment.get(\"residentList\");\r",
+							"var currentCount = pm.environment.get(\"counter\");\r",
+							"if (currentCount < residentList.length) {\r",
+							"    randomResident = residentList[currentCount];\r",
+							"    //var randomResident = residentList[Math.floor(Math.random() * residentList.length)];\r",
+							"    var splitResidentStr = randomResident.split('/');\r",
+							"    var personId = splitResidentStr[splitResidentStr.length - 2];\r",
+							"    pm.environment.set(\"person_id\", personId);\r",
+							"    pm.environment.set(\"counter\",currentCount+1);\r",
+							"    postman.setNextRequest(\"Get a Person\");\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "89037970-7db1-47f9-bb4a-20c3a6beb673",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var homeworldLink = jsonData.homeworld;\r",
+							"pm.collectionVariables.set(\"homeworld\", homeworldLink);\r",
+							"console.log('test')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/people/{{person_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"people",
+						"{{person_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0df09c54-f6f1-4c5a-92da-a5a0d151498d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "88ac683a-83e9-4763-b30f-cb25afd421cb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "53e37061-a89b-47c9-a653-561f3b359c16",
+			"key": "base_url",
+			"value": "https://swapi.dev/api"
+		},
+		{
+			"id": "74f97a1c-b625-4590-af50-da8789521b93",
+			"key": "id",
+			"value": ""
+		},
+		{
+			"id": "f91c945f-6182-49ce-a358-9c579a15e66e",
+			"key": "homeworld",
+			"value": ""
+		},
+		{
+			"id": "9b429063-7dbb-4d19-b327-6a7fbe3db3ee",
+			"key": "residentList",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

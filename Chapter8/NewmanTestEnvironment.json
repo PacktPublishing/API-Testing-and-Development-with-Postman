@@ -1,0 +1,14 @@
+{
+	"id": "2e789e4d-d79d-48a4-af89-ecd8b4292546",
+	"name": "Newman Test Env",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-11-04T14:28:26.372Z",
+	"_postman_exported_using": "Postman/7.34.0"
+}
