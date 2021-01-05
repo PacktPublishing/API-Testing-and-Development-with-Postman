@@ -22,19 +22,27 @@ function compareArrays(arr1,arr2){
   return true;
 }
 
+function checkForRequiredFields(requiredFields, req) {
+  //check without id
+  if (compareArrays(Object.keys(req.body),requiredFields)){
+    return true;
+  }
+  //check with id
+  requiredFields.unshift('id')
+  if (compareArrays(Object.keys(req.body),requiredFields)){
+    return true;
+  }
+  return false;
+}
+
 function allRequiredFieldsPresent(req){
-  var requiredFieldsAvatar = ['description','url','profileId','blogpostId','commentId']
   if (get_base_resource_from_url(req.url) == 'avatars'){
-     //check without id
-    if (compareArrays(Object.keys(req.body),requiredFieldsAvatar)){
-      return true;
-    }
-    //check with id
-    requiredFieldsAvatar.unshift('id')
-    if (compareArrays(Object.keys(req.body),requiredFieldsAvatar)){
-      return true;
-    }
-    return false;
+    var requiredFieldsAvatar = ['description','url','profileId','blogpostId','commentId']
+    return checkForRequiredFields (requiredFieldsAvatar, req);
+  }
+  if (get_base_resource_from_url(req.url) == 'comments') {
+    var requiredFieldsComments = ['body','blogpostId','profileId']
+    return checkForRequiredFields (requiredFieldsComments, req);
   }
   return true;
 }
@@ -88,7 +96,7 @@ server.use((req, res, next) => {
   else {
     var allowed_expandMap = {
       'avatars':['profile','blogpost','comment'],
-      'comments':['blogpost'],
+      'comments':['blogpost','profile'],
       'blogposts':['profile'],
       'profiles':[]
     }
