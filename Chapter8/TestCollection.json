@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "57169cda-7442-4f7c-883a-f07e61dbfe36",
+		"name": "Newman Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/get?{{queryParam}}={{queryParamVal}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "{{queryParam}}",
+							"value": "{{queryParamVal}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
