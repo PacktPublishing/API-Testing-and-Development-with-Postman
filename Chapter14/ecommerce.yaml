@@ -1,0 +1,9 @@
+openapi: 3.0.1
+info:
+  title: Simple Ecommerce API
+  description: Provides data for an ecommece site
+  version: '1.0'
+servers:
+  - url: http://localhost:5000/ecommerce/api/v1
+path:
+  
