@@ -6,4 +6,51 @@ info:
 servers:
   - url: http://localhost:5000/ecommerce/api/v1
 path:
-  
+  title: Example Ecommerce API
+  description: Provides data for an ecommerce page
+  version: '1.0'
+paths:
+  /products:
+    get:
+      summary: gets the list of products
+      operationId: GetListOfProducts
+      parameters:
+        - in: query
+          name: category
+          schema:
+            $ref: '#components/schemas/category'
+      responses:
+        '200':
+          description: got back the list of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/products'
+  /products/{{productId}}:
+  /cart/{{cartId}}:
+  /cart/{{cartId}}/{{productId}}:
+  /purchasehistory/{{userId}}:
+  /categories:
+    get:
+      summary: gets a list of available categories
+      responses:
+        '200':
+          description: got a list of categories
+          content:
+            application/json:
+              schema:
+                $ref: '/#components/schema/categories'
+          links:
+            ListOfCategories:
+            operationId: GetListOfProducts
+            parameters:
+              category: 'response.body#/'
+components:
+  schemas:
+    products:
+    category:
+      type: string    
+    categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/category'
