@@ -1,0 +1,154 @@
+openapi: 3.0.1
+info:
+  title: ToDo List API
+  description: Manages ToDo list tasks
+  version: '1.0'
+servers:
+  - url: http://localhost:5000/todolist/api/v1
+paths:
+  /tasks:
+    get:
+      description: gets the list of all tasks for the current user
+      responses:
+        '200':
+          description: got back the list of tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tasks'
+        '400':
+          description: sent wrongly formatted data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: create a new task
+      responses:
+        '201':
+          description: created a new task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+        '400':
+          description: sent wrongly formatted data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        $ref: '#/components/requestBodies/taskBody'
+  /tasks/{taskId}:
+    get:
+      description: Gets the informaiton for the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          name: taskId
+          description: Id of the task
+          required: true 
+          example:
+            taskId: 1
+      responses:
+        '200':
+          description: Got back the specified task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+        '400':
+          description: sent wrongly formatted data
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/Error'
+
+    put:
+      description: Changes the description for the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          name: taskId
+          description: Id of the task
+          required: true 
+      responses:
+        '200':
+          description: task updated correctly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+        '400':
+          description: send wrongly formatted data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        $ref: '#/components/requestBodies/taskBody'
+    delete:
+      description: Removes the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          name: taskId
+          description: Id of the task
+          required: true 
+      responses:
+        '204':
+          description: specified task removed
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  requestBodies:
+    taskBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/task'
+          examples:
+            New:
+              value:
+                title: Learn API Testing
+                status: New
+            InProgress:
+              value:
+                title: Learn API Testing
+                status: In Progress
+            Completed:
+              value:
+                title: Learn API Testing
+                status: Completed
+  schemas:
+    taskId:
+      type: integer
+      minimum: 1
+      example: 1
+    task:
+      type: object
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+          enum: [New,In Progress,Completed]
+        dueDate:
+            type: string
+            format: date-time
+    tasks:
+      type: array
+      items:
+        $ref: '#/components/schemas/task'
+    Error:
+      type: string
+      default: "Bad data sent"
