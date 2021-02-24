@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "870d9057-0676-4d15-950f-b68ad7611d7c",
+		"name": "Star Wars API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Luke",
+			"item": [
+				{
+					"name": "Get People",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check that the response body contains Luke\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Luke\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Luke's Height\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.height).to.eql(\"172\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Luke's eye color\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.eye_color).to.eql(\"blue\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check the homeworld URL\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.homeworld).to.eql(\"http://swapi.dev/api/planets/1/\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Server is nginx\", function () {\r",
+									"    pm.response.to.have.header(\"Server\",'nginx/1.16.1');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Luke is in 4 films\", function () {\r",
+									"    pm.expect(pm.response.json().films.length).to.eql(4)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://swapi.dev/api/people/1",
+							"protocol": "https",
+							"host": [
+								"swapi",
+								"dev"
+							],
+							"path": [
+								"api",
+								"people",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Luke's Home world",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
