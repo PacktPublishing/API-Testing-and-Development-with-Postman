@@ -1,0 +1,141 @@
+openapi: 3.0.1
+info:
+  title: Simple Ecommerce API
+  description: Provides data for an ecommece site
+  version: '1.0'
+servers:
+  - url: http://localhost:5000/ecommerce/api/v1
+paths:
+  /products:
+    get:
+      summary: gets the list of products
+      operationId: GetListOfProducts
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: got back the list of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/products'
+  /products/{{productId}}:
+    get:
+      summary: gets the information about the product with the specified productId
+      responses:
+        '200':
+          description: got back product info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'
+  /cart/{{cartId}}:
+    get:
+      summary: tells you what items are in your cartId
+      responses:
+        '200':
+          description: got back a list of items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+    post:
+      summary: add an item to the cartId
+      responses:
+        '201':
+          description: add the specified item to the cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+  /cart/{{cartId}}/{{productId}}:
+    delete:
+      summary: removes the given item from the given cart
+      responses:
+        '204':
+          description: specified product removed
+          content:
+            application/json:
+              schema:
+                type: object
+  /purchasehistory/{{userId}}:
+    get:
+      summary: get the purchase history of the given user
+      responses:
+        '200':
+          description: succusfully returned a list of purchased items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchases'
+  /categories:
+    get:
+      summary: gets a list of available categories
+      responses:
+        '200':
+          description: got a list of categories
+          content:
+            application/json:
+              schema:
+                $ref: '/#components/schema/categories'
+          links:
+            ListOfCategories:
+              operationId: GetListOfProducts
+              parameters:
+                category: '$response.body'
+components:
+  schemas:
+    purchases:
+      allOf:
+        - $ref: '#/components/schemas/product'
+        - type: object
+          properties:
+            purchasedDate:
+              type: string
+              format: date-time
+    cart:
+      type: array
+      items:
+        $ref: '#/components/schemas/product'
+    cartBody:
+      type: object
+    product:
+      type: object
+      required:
+        - productId
+        - description
+        - price
+        - imageLink
+      properties:
+        productId:
+          type: integer
+          minimum: 1
+        description:
+          type: string
+        price:
+          type: number
+          minimum: 0.0
+        imageLink:
+          type: string
+          format: uri
+        category:
+          type: string
+      examples:
+          productId: 10
+          description: "A Shirt"
+          price: 12.55
+          imageLink: "https://www.alink.com"
+          category: "Men's Clothes"
+    products:
+      type: array
+      items:
+        $ref: '#/components/schemas/product'
+    categories:
+      type: array
+      items:
+        type: string
