@@ -125,7 +125,7 @@ components:
           format: uri
         category:
           type: string
-      examples:
+      example:
           productId: 10
           description: "A Shirt"
           price: 12.55
