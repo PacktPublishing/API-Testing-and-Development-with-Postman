@@ -2,6 +2,8 @@
 
 <a href="https://www.packtpub.com/product/api-testing-and-development-with-postman/9781800569201"><img src="https://static.packt-cdn.com/products/9781800569201/cover/smaller" alt="API Testing and Development with Postman" height="256px" align="right"></a>
 
+This is the code repository for [API Testing and Development with Postman](https://www.packtpub.com/product/api-testing-and-development-with-postman/9781800569201), published by Packt.
+
 **A practical guide to creating, testing, and managing APIs for automated software testing**
 
 ## What is this book about?
