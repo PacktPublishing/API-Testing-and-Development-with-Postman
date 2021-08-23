@@ -56,7 +56,8 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 * Building Low Code Applications wtih Mendix [[Packt]](https://www.packtpub.com/product/building-low-code-applications-with-mendix/9781800201422) [[Amazon]](https://www.amazon.com/dp/1800201427)
    
 ## Errata 
- *  Page 54, Section: Creating mocks from an OAS Step 1: **Use the Save as YAML option...** _should be_ **Use the Save as YMAL option...**
+ * Page 54(Paragraph 2, line 3 ): **Use the Save as YAML option...** _should be_ **Use the Save as YMAL option...**
+ * Page 55(Paragraph 2, line 5 ): **With the Generate collection from schema option...**  _should be_ **With the Generate from API Schema option...** 
 
 ## Get to Know the Author
 **Dave Westerveld**
