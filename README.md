@@ -54,6 +54,9 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 * Enterprise API Management [[Packt]](https://www.packtpub.com/product/enterprise-api-management/9781787284432) [[Amazon]](https://www.amazon.in/dp/1787284433)
 
 * Building Low Code Applications wtih Mendix [[Packt]](https://www.packtpub.com/product/building-low-code-applications-with-mendix/9781800201422) [[Amazon]](https://www.amazon.com/dp/1800201427)
+   
+## Errata 
+ *  Page 54, Section: Creating mocks from an OAS Step 1: **Use the Save as YAML option...** _should be_ **Use the Save as YMAL option...**
 
 ## Get to Know the Author
 **Dave Westerveld**
