@@ -56,7 +56,10 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 * Building Low Code Applications wtih Mendix [[Packt]](https://www.packtpub.com/product/building-low-code-applications-with-mendix/9781800201422) [[Amazon]](https://www.amazon.com/dp/1800201427)
    
 ## Errata 
- * Page 55(Paragraph 2, line 5 ): **With the Generate collection from schema option...**  _should be_ **With the Generate from API Schema option...** 
+ * Page 54 (bullet point 5):  **Name the API something such as Swagger Pet Store** _should be_ **This will automatically import the API and create a collection. Click on Confirm and Close.**
+ * Page 55 (Paragraph 1 including figure 3.4): Should be ignored and removed.
+ * Page 55(Paragraph 2, bullet point  2): **With the Generate collection from schema option...**  _should be_ **Since Postman has already created a collection, leave the Use and Existing collection option selected, and click on Select Collection and Continue** 
+ * Page 55 (Paragraph 2, bullet point 3):  Should be ignored and removed.
 
 ## Get to Know the Author
 **Dave Westerveld**
