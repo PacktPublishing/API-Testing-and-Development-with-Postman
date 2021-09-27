@@ -60,6 +60,8 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
  * Page 55 (Paragraph 1 including figure 3.4): Should be ignored and removed.
  * Page 55(Paragraph 2, bullet point  2): **With the Generate collection from schema option...**  _should be_ **Since Postman has already created a collection, leave the Use and Existing collection option selected, and click on Select Collection and Continue** 
  * Page 55 (Paragraph 2, bullet point 3):  Should be ignored and removed.
+ * Page 57 (bullet point 6):  **choose Swagger Pet Store API** _should be_ **chose Swagger Petstore**
+ * Page 58 (step 1 near the top):  **Make sure you have Swagger Pet Store API selected** _should be_ **Make sure you have Swagger Petstore selected**
 
 ## Get to Know the Author
 **Dave Westerveld**
