@@ -68,3 +68,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 is a Senior Software Test developer. He has worked for several years as a software tester and has been involved in numerous projects involving test automation. He is an API testing expert. He was part of a team that developed new APIs and worked on automation projects for API tests as well. He has published various well-received video courses. He is passionate about sharing his knowledge and expertise that help testers stay relevant in the changing world of software testing.
 
 
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781800569201">https://packt.link/free-ebook/9781800569201 </a> </p>
