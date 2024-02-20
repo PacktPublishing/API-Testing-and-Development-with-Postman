@@ -41,7 +41,7 @@ paths:
         $ref: '#/components/requestBodies/taskBody'
   /tasks/{taskId}:
     get:
-      description: Gets the informaiton for the specified task
+      description: Gets the information for the specified task
       parameters:
         - in: path
           schema:
