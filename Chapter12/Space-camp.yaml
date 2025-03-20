@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  version: '0.1'
+  title: 'LibraryAPI'
+  license:
+    name: MIT
+servers:
+  - description: The base path for all resources
+    url: http://localhost:3000/
+paths:
+  /book:
+    get:
+      summary: 'get one book'
+      operationId: getBook
+      tags:
+        - book
+      parameters:
+        - name: bookId
+          in: query
+          description: ID of the book
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 'Details about a book by ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/book'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /books:
+    get:
+      summary: 'get all books'
+      operationId: getBooks
+      tags:
+        - book
+      responses:
+        '200':
+          description: 'Details about many books'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/books'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    book:
+      type: object
+      required:
+        - id
+        - title
+        - author
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of the book
+          example: "e8f70452-0607-4e7b-8ae4-15c4345c9007"
+        title:
+          type: string
+          description: Title of the book
+          example: "Ready Player One"
+        author:
+          type: string
+          description: Name of the book author
+          example: "Cline, Ernest"
+        genre:
+          type: string
+          description: Category/genre of the book
+          example: "Science Fiction"
+        yearPublished:
+          type: integer
+          format: int32
+          description: integer year of book publication, negative for B.C.
+          example: 2011
+        checkedOut:
+          type: boolean
+          description: is book currently checked out of the library
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: date entry was added to library database
+          example: "2021-06-02 17:37:38"
+    books:
+      type: array
+      items:
+        $ref: '#/components/schemas/book'
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+          description: "integer value indicating a client/server problem"
+        message:
+          type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: []

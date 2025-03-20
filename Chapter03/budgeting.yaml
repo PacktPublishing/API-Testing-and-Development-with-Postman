@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Budgeting API
+  description: Manages budget line items
+  version: '1.0'
+servers:
+  - url: http://localhost:5000/budgeting/api
+
+paths:
+  /items:
+    get:
+      description: Get the list budget line items
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/items'
+    post:
+      description: Create a new budget line item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/item'
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+  /item/{itemId}:
+    get:
+      description: Gets the information for the specified line item
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/itemId'
+          name: itemId
+          description: Id of the line item
+          required: true
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+    put:
+      description: Updates the information for the specified line item
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/itemId'
+          example:
+            title: Example Task itemId
+            value: 1
+          name: itemId
+          description: Id of the line item
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/item'
+            examples:
+              Groceries:
+                value:
+                  transaction_date: 2024-06-01
+                  amount: 123.45
+                  category: groceries
+              Rent:
+                value:
+                  transaction_date: 2024-06-01
+                  amount: 1500
+                  category: rent
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+    delete:
+      description: Removes the specified line item
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/itemId'
+          name: itemId
+          description: Id of the line item
+          required: true
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    item:
+      type: object
+      required:
+        - transaction_date
+        - amount
+        - category
+      properties:
+        transaction_date:
+          type: string
+          format: date
+        amount:
+          type: integer
+        category:
+          type: string
+    itemId:
+      type: integer
+      minimum: 1
+    items:
+      type: array
+      items:
+        $ref: '#/components/schemas/item'

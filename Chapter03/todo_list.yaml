@@ -1,0 +1,121 @@
+openapi: 3.0.1
+info:
+  title: ToDo List API
+  description: Manages ToDo list tasks
+  version: '1.0'
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /tasks:
+    get:
+      description: Get the list of all tasks
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tasks'
+    post:
+      description: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task'
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+  /tasks/{taskId}:
+    get:
+      description: Gets the information for the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          name: taskId
+          description: Id of the task
+          required: true
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+    put:
+      description: Updates the information for the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          example:
+            title: Example Task taskId
+            value: 1
+          name: taskId
+          description: Id of the task
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task'
+            examples:
+              New:
+                value:
+                  title: Start Learning API Testing
+                  status: New
+              In Progress:
+                value:
+                  title: Keeep learning API Testing
+                  status: In Progress
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task'
+    delete:
+      description: Updates the information for the specified task
+      parameters:
+        - in: path
+          schema:
+            $ref: '#/components/schemas/taskId'
+          name: taskId
+          description: Id of the task
+          required: true
+      responses:
+        '200':
+          description: Succussful Operation
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    task:
+      type: object
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+          enum: [New,In Progress,Completed]
+    taskId:
+      type: integer
+      minimum: 1
+    tasks:
+      type: array
+      items:
+        $ref: '#/components/schemas/task'
